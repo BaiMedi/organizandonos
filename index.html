@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diseña tu Rutina Diaria</title>
+    <style>
+        body {
+            font-family: 'Arimo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #E5EBF4;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1, h2 {
+            color: #22C0DC;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .btn {
+            background-color: #01BD39;
+            color: white;
+            padding: 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background-color: #019c31;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f8ff;
+            border: 1px solid #22C0DC;
+            border-radius: 5px;
+        }
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #22C0DC;
+        }
+        footer p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        footer a {
+            display: inline-block;
+            color: white;
+            background-color: #01BD39;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Diseña tu Rutina Diaria</h1>
+    <p>Planifica tu día ideal con tareas prioritarias y pausas necesarias para maximizar tu productividad.</p>
+
+    <label for="tasks">1. Tareas prioritarias (separadas por comas):</label>
+    <textarea id="tasks" placeholder="Ejemplo: Responder correos, Crear reportes, Reunión semanal..."></textarea>
+
+    <label for="breaks">2. Número de pausas necesarias:</label>
+    <input type="number" id="breaks" placeholder="Ejemplo: 3" />
+
+    <label for="break-time">3. Duración de cada pausa (en minutos):</label>
+    <input type="number" id="break-time" placeholder="Ejemplo: 15" />
+
+    <label for="start-time">4. Hora de inicio del día (formato 24h):</label>
+    <input type="time" id="start-time" />
+
+    <button class="btn" onclick="generateRoutine()">Generar Rutina</button>
+
+    <div id="result" class="result" style="display: none;">
+        <h2>Tu Rutina Ideal:</h2>
+        <p id="routine"></p>
+        <p id="suggestion" style="color: #22C0DC; font-weight: bold;"></p>
+    </div>
+</div>
+
+<footer>
+    <p>Descubre el Secreto de Reinventarse Profesionalmente en Solo 14 Días</p>
+    <a href="https://klicana.work/Ecpzgd">¡SÍ! INSCRIBIRME EN “ASISTENTE VIRTUAL EN 14 DÍAS”</a>
+</footer>
+
+<script>
+    function generateRoutine() {
+        const tasks = document.getElementById('tasks').value.split(',');
+        const breaks = parseInt(document.getElementById('breaks').value);
+        const breakTime = parseInt(document.getElementById('break-time').value);
+        const startTime = document.getElementById('start-time').value;
+
+        if (tasks.length === 0 || isNaN(breaks) || isNaN(breakTime) || !startTime) {
+            alert("Por favor, completa todos los campos.");
+            return;
+        }
+
+        const totalBreakTime = breaks * breakTime;
+        const tasksList = tasks.map(task => ` - ${task.trim()}`).join('\n');
+        const message = `Hora de inicio: ${startTime}\n\nTareas prioritarias:\n${tasksList}\n\nPausas necesarias: ${breaks} de ${breakTime} minutos cada una\n\nTiempo total de pausas: ${totalBreakTime} minutos`;
+
+        document.getElementById('routine').textContent = message;
+        document.getElementById('suggestion').textContent = "Sugerencia: Integra un estiramiento o una breve caminata en tus pausas para mantenerte activo.";
+        document.getElementById('result').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
